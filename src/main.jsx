@@ -5,9 +5,9 @@ import GlobalContextsComponent from './Contexts/GlobalContexts.jsx'
 import './index.css'
 
 createRoot(document.getElementById('root')).render(
-  // <StrictMode>
-  <GlobalContextsComponent>
-    <App />
-  </GlobalContextsComponent>
-  // </StrictMode>,
+  <StrictMode>
+    <GlobalContextsComponent>
+      <App />
+    </GlobalContextsComponent>
+  </StrictMode>,
 )
