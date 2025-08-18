@@ -4,7 +4,6 @@ import { GlobalContext } from "./Contexts/GlobalContexts";
 function App() {
 
   const { todoAppData, setTodoAppData } = useContext(GlobalContext);
-
   return (
     <>
       <div>
