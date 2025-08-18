@@ -1,7 +1,10 @@
 import { createContext, useEffect, useState } from "react";
-import TitleBoard from "../Components/TitleBoard";
-import TaskSpace from "../Components/TaskSpace";
 import AddTask from "../Components/AddTask";
+import TaskSpace from "../Components/TaskSpace";
+import TitleBoard from "../Components/TitleBoard";
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
+import LaunchIcon from '@mui/icons-material/Launch';
+import VerifiedIcon from '@mui/icons-material/Verified';
 
 export const GlobalContext = createContext(null);
 
@@ -11,16 +14,19 @@ export const defaultData = {
             name: "Open",
             id: 1,
             tasks: [],
+            textColor: "text-red-300",
         },
         {
             name: "Running",
             id: 2,
             tasks: [],
+            textColor: "text-green-300",
         },
         {
             name: "Closed",
             id: 3,
             tasks: [],
+            textColor: "text-blue-300",
         }
     ],
     taskCount: 0,
@@ -47,9 +53,15 @@ function GlobalContextsComponent({ children = "" }) {
         ],
     }
 
+    const icons = {
+        Open: DirectionsRunIcon,
+        Running: LaunchIcon,
+        Closed: VerifiedIcon,
+    }
+
     const storedData = localStorage?.getItem("taskData") ? JSON.parse(localStorage?.getItem("taskData")) : defaultData;
 
-    const [todoAppData, setTodoAppData] = useState({ ...storedData, ...componentData });
+    const [todoAppData, setTodoAppData] = useState({ ...storedData, ...componentData, ...icons });
 
     useEffect(() => {
         if (todoAppData?.taskCount > 0 && !todoAppData?.isDragged) {

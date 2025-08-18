@@ -1,14 +1,29 @@
 // TaskCard.jsx
 import { useContext } from "react";
 import { GlobalContext } from "../Contexts/GlobalContexts";
-import DeleteImage from "../Images/DeleteImage.jpg";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 export default function TaskCard({ taskData }) {
 
     const { setTodoAppData, todoAppData } = useContext(GlobalContext);
 
-    function handleRemoveTask() {
 
+    function handleRemoveTask() {
+        setTodoAppData({
+            ...todoAppData,
+            taskCount: todoAppData?.taskCount - 1,
+            taskCategory: todoAppData?.taskCategory?.map((category) => {
+                if (category?.id === taskData?.categoryId) {
+                    return {
+                        ...category,
+                        tasks: category?.tasks?.filter((data) => data?.taskName !== taskData?.task?.taskName),
+                    }
+                }
+                else {
+                    return category;
+                }
+            })
+        })
     }
 
     function handleDragStart() {
@@ -17,13 +32,13 @@ export default function TaskCard({ taskData }) {
 
     return (
         <div
-            className="flex bg-white rounded p-2 shadow cursor-grab h-20 justify-between"
+            className="flex border-1 shadow-1xl shadow-gray-500 border-gray-300 rounded p-2 shadow cursor-grab h-20 justify-between"
             draggable={true}
             onDragStart={(e) => handleDragStart(taskData?.task?.taskName)}
         >
             <div>
                 <div
-                    className="text-gray-800 font-bold text-2xl"
+                    className="font-bold text-2xl"
                 >
                     {taskData?.task?.taskName}
                 </div>
@@ -33,11 +48,11 @@ export default function TaskCard({ taskData }) {
             </div>
             <div>
                 <button
-                    className="cursor-pointer"
+                    className="cursor-pointer flex items-center justify-center w-12 h-12 text-center"
                     type="button"
                     onClick={handleRemoveTask}
                 >
-                    <img src={DeleteImage} alt="sorry" className="h-15" />
+                    <DeleteForeverIcon fontSize="large" />
                 </button>
             </div>
         </div>
