@@ -1,10 +1,38 @@
+import AutoDeleteIcon from '@mui/icons-material/AutoDelete';
+import { useContext } from 'react';
+import { GlobalContext } from '../Contexts/GlobalContexts';
+import { convertDataToDefault } from './CommonFunctions';
+
 export default function TitleBoard() {
+
+    const { todoAppData, setTodoAppData } = useContext(GlobalContext);
+
+    function deleteAllTasks() {
+        todoAppData?.taskCount > 0 && setTodoAppData({
+            ...todoAppData,
+            taskCount: 0,
+            taskCategory: todoAppData?.taskCategory?.map((category) => {
+                return {
+                    ...category,
+                    tasks: [],
+                };
+            })
+        })
+    }
+
     return (
-        <div>
-            <div
-                className="flex justify-center p-5 bg-black text-2xl text-white"
-            >
+        <div className="flex justify-between p-5 text-white bg-black">
+            <div className='text-2xl'>
                 Todo Application
+            </div>
+            <div>
+                <button
+                    onClick={() => deleteAllTasks()}
+                    className='flex gap-3 bg-red-700 p-2 rounded cursor-pointer'
+                >
+                    <div className='hidden md:block'>Remove All Task {todoAppData?.taskCount}</div>
+                    <AutoDeleteIcon />
+                </button>
             </div>
         </div>
     )

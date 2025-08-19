@@ -52,7 +52,7 @@ export default function NewTaskCard({ categoryId, onCancel }) {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="bg-neutral-800 p-2 rounded"
+            className="bg-stone-800 p-2 rounded"
         >
             <form onSubmit={handleAddTask}>
                 <input
@@ -60,7 +60,7 @@ export default function NewTaskCard({ categoryId, onCancel }) {
                     value={taskName}
                     onChange={(e) => setTaskName(e.target.value)}
                     placeholder="Enter task name"
-                    className="bg-neutral-700 text-white w-full p-4 rounded mb-2"
+                    className="bg-stone-700 text-white w-full p-4 rounded mb-2"
                     autoFocus
                 />
                 <div className="flex justify-between gap-2">
