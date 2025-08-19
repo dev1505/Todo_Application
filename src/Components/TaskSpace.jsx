@@ -49,7 +49,7 @@ export default function TaskSpace() {
 
     return (
         <div className="py-6 px-1 bg-black text-gray-300">
-            <div className="flex flex-col mx-1 gap-1 md:flex-row md:justify-evenly h-screen">
+            <div className="flex flex-col mx-1 gap-5 md:gap-1 md:flex-row md:justify-evenly h-screen">
                 {
                     todoAppData?.taskCategory?.map((data, index) => {
                         const IconElement = todoAppData[data?.name]
@@ -62,7 +62,7 @@ export default function TaskSpace() {
                                 onDrop={() => handleDraggedData(data)}
                             >
                                 <div
-                                    className={`text-center flex justify-between mb-2 rounded bg-neutral-900 p-3 font-bold text-2xl`}
+                                    className={`text-center flex justify-between md:mb-2 md:rounded ${data.tasks.length === 0 && addingTaskToCategory !== data.id ? "rounded-lg" : "rounded-t-lg"} bg-neutral-900 p-3 font-bold text-2xl`}
                                 >
                                     <div>
                                         <IconElement /> {data?.name}
@@ -75,7 +75,7 @@ export default function TaskSpace() {
                                     </div>
                                 </div>
                                 <div
-                                    className={`flex flex-col gap-2 text-sm p-3 ${data.tasks.length === 0 && addingTaskToCategory !== data.id ? 'hidden md:flex' : ''} bg-neutral-900 flex-grow rounded overflow-auto`}
+                                    className={`flex flex-col gap-2 text-sm p-3 ${data.tasks.length === 0 && addingTaskToCategory !== data.id ? 'hidden md:flex' : ''} bg-neutral-900 flex-grow md:rounded ${data.tasks.length === 0 && addingTaskToCategory !== data.id ? "rounded" : "rounded-b-lg"} overflow-auto`}
                                 >
                                     {
                                         data?.tasks?.map((task, index) => {
