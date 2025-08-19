@@ -65,7 +65,7 @@ export default function TaskSpace() {
                                     className={`text-center flex justify-between md:mb-2 md:rounded ${data.tasks.length === 0 && addingTaskToCategory !== data.id ? "rounded-lg" : "rounded-t-lg"} bg-neutral-900 p-3 font-bold text-2xl`}
                                 >
                                     <div>
-                                        <IconElement /> {data?.name}
+                                        <IconElement /> {data?.name} {data?.tasks?.length}
                                     </div>
                                     <div
                                         className="flex justify-end cursor-pointer"
