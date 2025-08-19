@@ -41,11 +41,7 @@ function GlobalContextsComponent({ children = "" }) {
             {
                 name: "Title",
                 component: TitleBoard
-            },
-            {
-                name: "AddTask",
-                component: AddTask
-            },
+            },  
             {
                 name: "Tasks",
                 component: TaskSpace
@@ -64,7 +60,7 @@ function GlobalContextsComponent({ children = "" }) {
     const [todoAppData, setTodoAppData] = useState({ ...storedData, ...componentData, ...icons });
 
     useEffect(() => {
-        if (todoAppData?.taskCount > 0 && !todoAppData?.isDragged) {
+        if (!todoAppData?.isDragged) {
             const { allComponents, ...restData } = todoAppData;
             localStorage.setItem("taskData", JSON.stringify(restData));
         }

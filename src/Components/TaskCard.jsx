@@ -1,4 +1,3 @@
-// TaskCard.jsx
 import { useContext } from "react";
 import { GlobalContext } from "../Contexts/GlobalContexts";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -32,9 +31,9 @@ export default function TaskCard({ taskData }) {
 
     return (
         <div
-            className="flex border-1 shadow-1xl shadow-gray-500 border-gray-300 rounded p-2 shadow cursor-grab h-20 justify-between"
+            className="border-1 border-neutral-400 rounded p-2 shadow cursor-grab h-20 flex justify-between"
             draggable={true}
-            onDragStart={(e) => handleDragStart(taskData?.task?.taskName)}
+            onDragStart={handleDragStart}
         >
             <div>
                 <div

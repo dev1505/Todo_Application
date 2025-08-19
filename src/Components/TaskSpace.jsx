@@ -1,9 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { GlobalContext } from "../Contexts/GlobalContexts";
 import TaskCard from "./TaskCard";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import NewTaskCard from "./NewTaskCard";
 
 export default function TaskSpace() {
     const { todoAppData, setTodoAppData } = useContext(GlobalContext);
+    const [addingTaskToCategory, setAddingTaskToCategory] = useState(null);
 
     function handleDraggedData(data) {
         if (todoAppData?.draggedData?.categoryId !== data?.id) {
@@ -36,9 +39,17 @@ export default function TaskSpace() {
         }
     }
 
+    function handleAddIndividualTask(categoryId) {
+        setAddingTaskToCategory(categoryId);
+    }
+
+    function handleCancelAddTask() {
+        setAddingTaskToCategory(null);
+    }
+
     return (
-        <div className="py-6 px-2 h-screen bg-black text-gray-300">
-            <div className="flex flex-col mx-2 gap-5 md:flex-row md:justify-evenly h-screen">
+        <div className="py-6 px-1 bg-black text-gray-300">
+            <div className="flex flex-col mx-1 gap-1 md:flex-row md:justify-evenly h-screen">
                 {
                     todoAppData?.taskCategory?.map((data, index) => {
                         const IconElement = todoAppData[data?.name]
@@ -51,12 +62,20 @@ export default function TaskSpace() {
                                 onDrop={() => handleDraggedData(data)}
                             >
                                 <div
-                                    className={`text-center mb-2 rounded border-1 border-gray-300 p-3 font-bold text-2xl`}
+                                    className={`text-center flex justify-between mb-2 rounded bg-neutral-900 p-3 font-bold text-2xl`}
                                 >
-                                    <IconElement /> {data?.name}
+                                    <div>
+                                        <IconElement /> {data?.name}
+                                    </div>
+                                    <div
+                                        className="flex justify-end cursor-pointer"
+                                        onClick={() => handleAddIndividualTask(data.id)}
+                                    >
+                                        <AddCircleIcon fontSize="large" />
+                                    </div>
                                 </div>
                                 <div
-                                    className={`flex flex-col gap-2 md:border-1 md:border-gray-300 ${data?.tasks?.length > 0 && "border-1 border-gray-300"} text-sm p-3 bg-black flex-grow rounded overflow-auto`}
+                                    className={`flex flex-col gap-2 text-sm p-3 ${data.tasks.length === 0 ? 'hidden md:flex' : ''} bg-neutral-900 flex-grow rounded overflow-auto`}
                                 >
                                     {
                                         data?.tasks?.map((task, index) => {
@@ -69,6 +88,9 @@ export default function TaskSpace() {
                                             )
                                         })
                                     }
+                                    {addingTaskToCategory === data.id && (
+                                        <NewTaskCard categoryId={data.id} onCancel={handleCancelAddTask} />
+                                    )}
                                 </div>
                             </div>
                         )
