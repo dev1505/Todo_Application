@@ -3,6 +3,7 @@ import { GlobalContext } from "../Contexts/GlobalContexts";
 import TaskCard from "./TaskCard";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import NewTaskCard from "./NewTaskCard";
+import { AnimatePresence } from "framer-motion";
 
 export default function TaskSpace() {
     const { todoAppData, setTodoAppData } = useContext(GlobalContext);
@@ -77,20 +78,18 @@ export default function TaskSpace() {
                                 <div
                                     className={`flex flex-col gap-2 text-sm p-3 ${data.tasks.length === 0 && addingTaskToCategory !== data.id ? 'hidden md:flex' : ''} bg-neutral-900 flex-grow md:rounded ${data.tasks.length === 0 && addingTaskToCategory !== data.id ? "rounded" : "rounded-b-lg"} overflow-auto`}
                                 >
-                                    {
-                                        data?.tasks?.map((task, index) => {
-                                            return (
-                                                <div
-                                                    key={index}
-                                                >
-                                                    <TaskCard taskData={{ task, category: data?.name, categoryId: data?.id }} />
-                                                </div >
-                                            )
-                                        })
-                                    }
-                                    {addingTaskToCategory === data.id && (
-                                        <NewTaskCard categoryId={data.id} onCancel={handleCancelAddTask} />
-                                    )}
+                                    <AnimatePresence>
+                                        {
+                                            data?.tasks?.map((task, index) => {
+                                                return (
+                                                    <TaskCard key={task.taskName} taskData={{ task, category: data?.name, categoryId: data?.id }} />
+                                                )
+                                            })
+                                        }
+                                        {addingTaskToCategory === data.id && (
+                                            <NewTaskCard categoryId={data.id} onCancel={handleCancelAddTask} />
+                                        )}
+                                    </AnimatePresence>
                                 </div>
                             </div>
                         )

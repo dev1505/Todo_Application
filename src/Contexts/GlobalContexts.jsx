@@ -50,8 +50,8 @@ function GlobalContextsComponent({ children = "" }) {
     }
 
     const icons = {
-        Open: DirectionsRunIcon,
-        Running: LaunchIcon,
+        Open: LaunchIcon,
+        Running: DirectionsRunIcon,
         Closed: VerifiedIcon,
     }
 

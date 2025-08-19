@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { GlobalContext } from "../Contexts/GlobalContexts";
 import CancelIcon from '@mui/icons-material/Cancel';
 import AddTaskIcon from '@mui/icons-material/AddTask';
+import { motion } from "framer-motion";
 
 export default function NewTaskCard({ categoryId, onCancel }) {
     const { todoAppData, setTodoAppData } = useContext(GlobalContext);
@@ -46,7 +47,13 @@ export default function NewTaskCard({ categoryId, onCancel }) {
     };
 
     return (
-        <div className="bg-neutral-800 p-2 rounded">
+        <motion.div
+            layout
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="bg-neutral-800 p-2 rounded"
+        >
             <form onSubmit={handleAddTask}>
                 <input
                     type="text"
@@ -65,6 +72,6 @@ export default function NewTaskCard({ categoryId, onCancel }) {
                     </button>
                 </div>
             </form>
-        </div>
+        </motion.div>
     );
 }

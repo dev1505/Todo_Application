@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { GlobalContext } from "../Contexts/GlobalContexts";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { motion } from "framer-motion";
 
 export default function TaskCard({ taskData }) {
 
@@ -30,7 +31,12 @@ export default function TaskCard({ taskData }) {
     }
 
     return (
-        <div
+        <motion.div
+            layout
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            whileHover={{ scale: 1.05 }}
             className="border-1 border-neutral-400 rounded p-2 shadow cursor-grab h-20 flex justify-between"
             draggable={true}
             onDragStart={handleDragStart}
@@ -54,6 +60,6 @@ export default function TaskCard({ taskData }) {
                     <DeleteForeverIcon fontSize="large" />
                 </button>
             </div>
-        </div>
+        </motion.div>
     );
 }
