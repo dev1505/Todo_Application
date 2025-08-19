@@ -119,7 +119,7 @@ function GlobalContextsComponent({ children = "" }) {
         Closed: VerifiedIcon,
     }
 
-    const storedData = localStorage?.getItem("taskData")?.taskCount > 0 ? JSON.parse(localStorage?.getItem("taskData")) : defaultData;
+    const storedData = localStorage?.getItem("taskData") ? JSON.parse(localStorage?.getItem("taskData"))?.taskCount > 0 ? JSON.parse(localStorage?.getItem("taskData")) : defaultData : defaultData;
 
     const [todoAppData, setTodoAppData] = useState({ ...storedData, ...componentData, ...icons });
 

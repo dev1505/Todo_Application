@@ -73,7 +73,7 @@ export default function TaskSpace() {
     }
 
     return (
-        <div className="px-4 bg-black text-gray-300 pb-5 min-h-screen">
+        <div className="px-4 bg-black text-gray-300 pb-5 h-screen">
             {/* Mobile View */}
             <div className="md:hidden">
                 <div className="flex border justify-around p-2 rounded-lg">
@@ -134,7 +134,7 @@ export default function TaskSpace() {
             </div>
 
             {/* Desktop View */}
-            <div className="hidden md:flex flex-col mx-1 gap-5 md:gap-1 md:flex-row md:justify-evenly">
+            <div className="hidden md:flex flex-col mx-1 gap-5 md:gap-1 md:flex-row md:justify-evenly h-screen">
                 {
                     todoAppData?.taskCategory?.map((data, index) => {
                         const IconElement = todoAppData[data?.name]
