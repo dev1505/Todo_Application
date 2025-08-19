@@ -75,7 +75,7 @@ export default function TaskSpace() {
                                     </div>
                                 </div>
                                 <div
-                                    className={`flex flex-col gap-2 text-sm p-3 ${data.tasks.length === 0 ? 'hidden md:flex' : ''} bg-neutral-900 flex-grow rounded overflow-auto`}
+                                    className={`flex flex-col gap-2 text-sm p-3 ${data.tasks.length === 0 && addingTaskToCategory !== data.id ? 'hidden md:flex' : ''} bg-neutral-900 flex-grow rounded overflow-auto`}
                                 >
                                     {
                                         data?.tasks?.map((task, index) => {
