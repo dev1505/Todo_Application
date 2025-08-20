@@ -114,7 +114,7 @@ export default function TaskSpace() {
                             onDragOver={(e) => e.preventDefault()}
                             onDrop={(e) => handleDrop(e, category?.id)}
                         >
-                            {category.name}
+                            {category.name} {category?.tasks?.length}
                         </button>
                     ))}
                 </div>
