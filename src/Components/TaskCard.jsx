@@ -54,11 +54,11 @@ export default function TaskCard({ taskData }) {
             </div>
             <div className="flex items-center">
                 <button
-                    className="cursor-pointer justify-center w-12 h-12 text-center"
+                    className="cursor-pointer justify-center w-12 h-12 text-center text-red-700"
                     type="button"
                     onClick={handleRemoveTask}
                 >
-                    <DeleteForeverIcon fontSize="large" color="error" />
+                    <DeleteForeverIcon fontSize="large" />
                 </button>
             </div>
         </motion.div>

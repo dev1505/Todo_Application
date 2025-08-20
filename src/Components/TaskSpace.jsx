@@ -9,11 +9,7 @@ import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 export default function TaskSpace() {
     const { todoAppData, setTodoAppData } = useContext(GlobalContext);
     const [addingTaskToCategory, setAddingTaskToCategory] = useState(null);
-    const [selectedCategory, setSelectedCategory] = useState(todoAppData.taskCategory[0].id);
-
-    // useEffect(() => {
-    //     setSelectedCategory();
-    // }, []);
+    const [selectedCategory, setSelectedCategory] = useState(todoAppData?.taskCategory[0]?.id ?? 0);
 
     function handleDraggedData(data) {
         if (todoAppData?.draggedData?.categoryId !== data?.id) {
@@ -76,12 +72,12 @@ export default function TaskSpace() {
         <div className="px-4 bg-black text-gray-300 pb-5 h-screen">
             {/* Mobile View */}
             <div className="md:hidden">
-                <div className="flex border justify-around p-2 rounded-lg">
+                <div className="flex border justify-around p-2 gap-2 rounded-lg">
                     {todoAppData?.taskCategory?.map((category) => (
                         <button
-                            key={category.id}
-                            className={`cursor-pointer p-2 w-full rounded-lg ${selectedCategory === category.id ? 'bg-neutral-700' : ''}`}
-                            onClick={() => setSelectedCategory(category.id)}
+                            key={category?.id}
+                            className={`cursor-pointer p-2 w-full rounded-lg focus:bg-neutral-600 hover:bg-neutral-800`}
+                            onClick={() => setSelectedCategory(category?.id)}
                             onDragOver={(e) => { e.preventDefault() }}
                             onDrop={() => handleDraggedData(category)}
                         >
@@ -118,10 +114,16 @@ export default function TaskSpace() {
                                     <div className={`flex flex-col gap-2 text-sm p-2 bg-neutral-900 flex-grow rounded-b-lg overflow-auto shrink-0`}>
                                         <AnimatePresence>
                                             {category?.tasks?.map((task) => (
-                                                <TaskCard key={task.taskName} taskData={{ task, category: category.name, categoryId: category.id }} />
+                                                <TaskCard
+                                                    key={task.taskName}
+                                                    taskData={{ task, category: category.name, categoryId: category.id }}
+                                                />
                                             ))}
                                             {addingTaskToCategory === category.id && (
-                                                <NewTaskCard categoryId={category.id} onCancel={handleCancelAddTask} />
+                                                <NewTaskCard
+                                                    categoryId={category.id}
+                                                    onCancel={handleCancelAddTask}
+                                                />
                                             )}
                                         </AnimatePresence>
                                     </div>
@@ -149,7 +151,9 @@ export default function TaskSpace() {
                                 <div
                                     className={`text-center flex justify-between md:mb-2 md:rounded ${data?.tasks?.length === 0 && addingTaskToCategory !== data.id ? "rounded-lg" : "rounded-t-lg"} bg-neutral-900 p-3 font-bold text-2xl`}
                                 >
-                                    <div className={`flex items-center gap-3  ${data.textColor}`}>
+                                    <div
+                                        className={`flex items-center gap-3  ${data.textColor}`}
+                                    >
                                         <div><IconElement /></div>
                                         <div>{data?.name}</div>
                                         <div>{data?.tasks?.length}</div>
@@ -171,16 +175,23 @@ export default function TaskSpace() {
                                 </div>
                                 <div
                                     className={`flex flex-col gap-2 text-sm p-2  ${data.tasks.length === 0 && addingTaskToCategory !== data.id ? 'hidden md:flex' : ''} flex-grow md:rounded ${data.tasks.length === 0 && addingTaskToCategory !== data.id ? "rounded" : "rounded-b-lg"} overflow-auto shrink-0`}
-                                >                                    <AnimatePresence>
+                                >
+                                    <AnimatePresence>
                                         {
                                             data?.tasks?.map((task, index) => {
                                                 return (
-                                                    <TaskCard key={task.taskName} taskData={{ task, category: data?.name, categoryId: data?.id }} />
+                                                    <TaskCard
+                                                        key={task.taskName}
+                                                        taskData={{ task, category: data?.name, categoryId: data?.id }}
+                                                    />
                                                 )
                                             })
                                         }
                                         {addingTaskToCategory === data.id && (
-                                            <NewTaskCard categoryId={data.id} onCancel={handleCancelAddTask} />
+                                            <NewTaskCard
+                                                categoryId={data.id}
+                                                onCancel={handleCancelAddTask}
+                                            />
                                         )}
                                     </AnimatePresence>
                                 </div>
