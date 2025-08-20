@@ -39,6 +39,7 @@ export const defaultData = {
             name: "Open",
             id: 1,
             textColor: "text-red-300",
+            borderStraightLine: "border-red-300",
             tasks: [
                 {
                     taskName: "Design login screen UI, Create a wireframe for the login screen including email and password fields.",
@@ -58,6 +59,7 @@ export const defaultData = {
             name: "Running",
             id: 2,
             textColor: "text-green-300",
+            borderStraightLine: "border-green-300",
             tasks: [
                 {
                     taskName: "Implement task filtering by status, Add dropdown or tab UI to filter tasks by Open, Running, or Closed.",
@@ -77,6 +79,7 @@ export const defaultData = {
             name: "Closed",
             id: 3,
             textColor: "text-blue-300",
+            borderStraightLine: "border-blue-300",
             tasks: [
                 {
                     taskName: "Create basic layout and theme, Completed the initial responsive layout using Tailwind CSS.",

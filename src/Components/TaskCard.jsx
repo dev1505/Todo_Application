@@ -37,13 +37,13 @@ export default function TaskCard({ taskData }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             whileHover={{ scale: 1.01 }}
-            className="bg-neutral-900 border-neutral-700 border rounded p-3 text-neutral-300 shadow cursor-grab h-auto flex justify-between task-card"
+            className="bg-neutral-900 border-neutral-700 border rounded py-3 pl-3 text-neutral-300 shadow cursor-grab h-auto flex justify-between task-card"
             draggable={true}
             onDragStart={handleDragStart}
         >
             <div className="flex-grow w-0 mr-2">
                 <div
-                    className="text-base rounded whitespace-normal break-words justify-evenly"
+                    className="rounded whitespace-normal break-words justify-evenly"
                 >
                     {taskData?.task?.taskName}
                 </div>
@@ -52,9 +52,9 @@ export default function TaskCard({ taskData }) {
                     <span className="group-hover:text-white">{taskData?.task?.addedTime}</span>
                 </div>
             </div>
-            <div className="flex items-center">
+            <div className={`flex items-center border-l-1 ${taskData?.borderStraightLine}`}>
                 <button
-                    className="cursor-pointer justify-center w-12 h-12 text-center text-red-700"
+                    className="cursor-pointer justify-center w-12 h-12 text-center hover:text-red-700"
                     type="button"
                     onClick={handleRemoveTask}
                 >

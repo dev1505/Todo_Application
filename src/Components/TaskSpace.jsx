@@ -102,7 +102,7 @@ export default function TaskSpace() {
     }
 
     return (
-        <div className="px-4 bg-black text-gray-300 pb-5 h-screen">
+        <div className="px-4 bg-black text-gray-300 pb-5 min-h-screen">
             {/* Mobile View */}
             <div className="md:hidden">
                 <div className="flex border justify-around p-2 gap-2 rounded-lg">
@@ -114,7 +114,7 @@ export default function TaskSpace() {
                             onDragOver={(e) => e.preventDefault()}
                             onDrop={(e) => handleDrop(e, category?.id)}
                         >
-                            {category.name} {category?.tasks?.length}
+                            {category?.name} {category?.tasks?.length}
                         </button>
                     ))}
                 </div>
@@ -154,7 +154,7 @@ export default function TaskSpace() {
                                                 {category?.tasks?.map((task) => (
                                                     <TaskCard
                                                         key={task?.taskName}
-                                                        taskData={{ task, category: category?.name, categoryId: category?.id }}
+                                                        taskData={{ task, category: category?.name, categoryId: category?.id, borderStraightLine: category?.borderStraightLine }}
                                                     />
                                                 ))}
                                                 {addingTaskToCategory === category?.id && (
@@ -187,7 +187,7 @@ export default function TaskSpace() {
                                 onDrop={(e) => handleDrop(e, data?.id)}
                             >
                                 <div
-                                    className={`text-center flex justify-between md:mb-2 md:rounded ${data?.tasks?.length === 0 && addingTaskToCategory !== data?.id ? "rounded-lg" : "rounded-t-lg"} bg-neutral-900 p-3 font-bold text-2xl`}
+                                    className={`text-center flex justify-between md:mb-2 md:rounded ${data?.tasks?.length === 0 && addingTaskToCategory !== data?.id ? "rounded-lg" : "rounded-t-lg"} bg-neutral-900 p-3 font-bold text-xl`}
                                 >
                                     <div
                                         className={`flex items-center gap-3  ${data?.textColor}`}
@@ -201,12 +201,12 @@ export default function TaskSpace() {
                                     >
                                         <AddCircleIcon
                                             className='text-green-500'
-                                            fontSize="large"
+                                            fontSize='large'
                                             onClick={() => handleAddIndividualTask(data?.id)}
                                         />
                                         <DeleteSweepIcon
-                                            className='text-stone-400'
-                                            fontSize="large"
+                                            className='text-stone-400 hover:text-red-500'
+                                            fontSize='large'
                                             onClick={() => deleteAllTaskFromCategory(data?.id, data?.tasks?.length)}
                                         />
                                     </div>
@@ -221,7 +221,7 @@ export default function TaskSpace() {
                                                 return (
                                                     <TaskCard
                                                         key={task?.taskName}
-                                                        taskData={{ task, category: data?.name, categoryId: data?.id }}
+                                                        taskData={{ task, category: data?.name, categoryId: data?.id, borderStraightLine: data?.borderStraightLine }}
                                                     />
                                                 )
                                             })
