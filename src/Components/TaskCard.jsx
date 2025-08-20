@@ -37,7 +37,7 @@ export default function TaskCard({ taskData }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             whileHover={{ scale: 1.01 }}
-            className="bg-neutral-900 border-neutral-700 border rounded p-3 text-neutral-300 shadow cursor-grab h-auto flex justify-between"
+            className="bg-neutral-900 border-neutral-700 border rounded p-3 text-neutral-300 shadow cursor-grab h-auto flex justify-between task-card"
             draggable={true}
             onDragStart={handleDragStart}
         >

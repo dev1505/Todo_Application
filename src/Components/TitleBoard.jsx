@@ -21,7 +21,7 @@ export default function TitleBoard() {
     }
 
     return (
-        <div className="flex justify-between p-5 text-white bg-black">
+        <div className="flex justify-between p-6 text-white bg-black">
             <div className='text-2xl'>
                 Todo Application
             </div>
