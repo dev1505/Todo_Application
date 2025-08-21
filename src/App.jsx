@@ -1,14 +1,12 @@
-import { useContext } from "react";
-import { GlobalContext } from "./Contexts/GlobalContexts";
+import { componentData } from "./Contexts/GlobalContexts";
 
 function App() {
 
-  const { todoAppData, setTodoAppData } = useContext(GlobalContext);
   return (
     <>
       <div className="bg-black min-h-screen">
         {
-          todoAppData?.allComponents?.map((data, index) => {
+          componentData?.allComponents?.map((data, index) => {
             const Component = data?.component;
             return (
               <div

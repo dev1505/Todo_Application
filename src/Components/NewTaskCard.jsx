@@ -7,14 +7,14 @@ import { motion } from "framer-motion";
 
 export default function NewTaskCard({ categoryId, onCancel }) {
     const { todoAppData, setTodoAppData } = useContext(GlobalContext);
-    const [taskName, setTaskName] = useState("");
+    const [taskName, setTaskName] = useState({ taskName: "", title: "" });
 
     const handleAddTask = (e) => {
         e.preventDefault();
-        if (taskName.trim() === "") return;
+        if (taskName?.title?.trim() === "") return;
 
-        const taskExists = todoAppData.taskCategory.some(category => 
-            category.tasks.some(task => task.taskName.toLowerCase() === taskName.toLowerCase())
+        const taskExists = todoAppData.taskCategory.some(category =>
+            category.tasks.some(task => task.title.toLowerCase() === taskName.title.toLowerCase())
         );
 
         if (taskExists) {
@@ -23,7 +23,8 @@ export default function NewTaskCard({ categoryId, onCancel }) {
         }
 
         const newTask = {
-            taskName: taskName,
+            taskName: taskName?.taskName,
+            title: taskName?.title,
             addedTime: new Date().toLocaleTimeString(),
         };
 
@@ -57,11 +58,20 @@ export default function NewTaskCard({ categoryId, onCancel }) {
             <form onSubmit={handleAddTask}>
                 <input
                     type="text"
-                    value={taskName}
-                    onChange={(e) => setTaskName(e.target.value)}
-                    placeholder="Enter task name"
-                    className="bg-stone-700 text-white w-full p-4 rounded mb-2"
+                    value={taskName?.title}
+                    onChange={(e) => setTaskName({ ...taskName, title: e.target.value })}
+                    placeholder="Enter task Title"
+                    className="bg-stone-700 text-white w-full p-2 rounded mb-2"
                     autoFocus
+                    required={true}
+                />
+                <input
+                    type="text"
+                    value={taskName?.taskName}
+                    onChange={(e) => setTaskName({ ...taskName, taskName: e.target.value })}
+                    placeholder="Enter task Description"
+                    className="bg-stone-700 text-white w-full p-2 rounded mb-2"
+                    required={true}
                 />
                 <div className="flex justify-between gap-2">
                     <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">

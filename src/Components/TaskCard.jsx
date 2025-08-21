@@ -43,6 +43,11 @@ export default function TaskCard({ taskData }) {
         >
             <div className="flex-grow w-0 mr-2">
                 <div
+                    className="rounded whitespace-normal break-words justify-evenly font-bold mb-2 text-white"
+                >
+                    {taskData?.task?.title}
+                </div>
+                <div
                     className="rounded whitespace-normal break-words justify-evenly"
                 >
                     {taskData?.task?.taskName}

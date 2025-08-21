@@ -5,7 +5,7 @@ import { createContext, useEffect, useState } from "react";
 import TaskSpace from "../Components/TaskSpace";
 import TitleBoard from "../Components/TitleBoard";
 
-export const GlobalContext = createContext(null);
+export const GlobalContext = createContext({});
 
 // export const defaultData = {
 //     taskCategory: [
@@ -42,15 +42,18 @@ export const defaultData = {
             borderStraightLine: "border-red-300",
             tasks: [
                 {
-                    taskName: "Design login screen UI, Create a wireframe for the login screen including email and password fields.",
+                    title: 'Design login screen UI',
+                    taskName: "Create a wireframe for the login screen including email and password fields.",
                     addedTime: new Date().toLocaleTimeString(),
                 },
                 {
-                    taskName: "Set up project structure, Initialize the project repo with folders for components, services, and pages.",
+                    title: 'Set up project structure',
+                    taskName: "Initialize the project repo with folders for components, services, and pages.",
                     addedTime: new Date().toLocaleTimeString(),
                 },
                 {
-                    taskName: "Write API documentation, Document the backend API endpoints for tasks CRUD operations.",
+                    title: 'Write API documentation',
+                    taskName: "Document the backend API endpoints for tasks CRUD operations.",
                     addedTime: new Date().toLocaleTimeString(),
                 },
             ],
@@ -62,15 +65,18 @@ export const defaultData = {
             borderStraightLine: "border-green-300",
             tasks: [
                 {
-                    taskName: "Implement task filtering by status, Add dropdown or tab UI to filter tasks by Open, Running, or Closed.",
+                    title: "Implement task filtering by status",
+                    taskName: "Add dropdown or tab UI to filter tasks by Open, Running, or Closed.",
                     addedTime: new Date().toLocaleTimeString(),
                 },
                 {
-                    taskName: "Connect to Firebase backend, Set up Firebase project and integrate Firestore for task persistence.",
+                    title: "Connect to Firebase backend",
+                    taskName: "Set up Firebase project and integrate Firestore for task persistence.",
                     addedTime: new Date().toLocaleTimeString(),
                 },
                 {
-                    taskName: "Add due date feature, Allow users to set and update due dates on tasks and show them in the UI.",
+                    title: "Add due date feature",
+                    taskName: "Allow users to set and update due dates on tasks and show them in the UI.",
                     addedTime: new Date().toLocaleTimeString(),
                 },
             ],
@@ -82,15 +88,18 @@ export const defaultData = {
             borderStraightLine: "border-blue-300",
             tasks: [
                 {
-                    taskName: "Create basic layout and theme, Completed the initial responsive layout using Tailwind CSS.",
+                    title: "Create basic layout and theme",
+                    taskName: "Completed the initial responsive layout using Tailwind CSS.",
                     addedTime: new Date().toLocaleTimeString(),
                 },
                 {
-                    taskName: "Add task creation form, Built a form to add new tasks with title, description, and default status.",
+                    title: "Add task creation form",
+                    taskName: "Built a form to add new tasks with title, description, and default status.",
                     addedTime: new Date().toLocaleTimeString(),
                 },
                 {
-                    taskName: "Deploy app to Vercel, Successfully deployed the working version of the app to Vercel.",
+                    title: "Deploy app to Vercel",
+                    taskName: "Successfully deployed the working version of the app to Vercel.",
                     addedTime: new Date().toLocaleTimeString(),
                 },
             ],
@@ -101,35 +110,37 @@ export const defaultData = {
     isDragged: false,
 }
 
+export const componentData = {
+    allComponents: [
+        {
+            name: "Title",
+            component: TitleBoard
+        },
+        {
+            name: "Tasks",
+            component: TaskSpace
+        },
+    ],
+}
+
+export const icons = {
+    Open: LaunchIcon,
+    Running: DirectionsRunIcon,
+    Closed: VerifiedIcon,
+}
+
 function GlobalContextsComponent({ children = "" }) {
 
-    const componentData = {
-        allComponents: [
-            {
-                name: "Title",
-                component: TitleBoard
-            },
-            {
-                name: "Tasks",
-                component: TaskSpace
-            },
-        ],
-    }
 
-    const icons = {
-        Open: LaunchIcon,
-        Running: DirectionsRunIcon,
-        Closed: VerifiedIcon,
-    }
 
     const storedData = localStorage?.getItem("taskData") ? JSON.parse(localStorage?.getItem("taskData"))?.taskCount > 0 ? JSON.parse(localStorage?.getItem("taskData")) : defaultData : defaultData;
 
-    const [todoAppData, setTodoAppData] = useState({ ...storedData, ...componentData, ...icons });
+    const [todoAppData, setTodoAppData] = useState(storedData);
 
     useEffect(() => {
         if (!todoAppData?.isDragged) {
-            const { allComponents, ...restData } = todoAppData;
-            localStorage.setItem("taskData", JSON.stringify(restData));
+            // const {...restData } = todoAppData;
+            localStorage.setItem("taskData", JSON.stringify(todoAppData));
         }
     }, [todoAppData])
 

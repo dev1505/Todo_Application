@@ -1,8 +1,6 @@
-import AutoDeleteIcon from '@mui/icons-material/AutoDelete';
 import { useContext } from 'react';
 import { GlobalContext } from '../Contexts/GlobalContexts';
-import { convertDataToDefault } from './CommonFunctions';
-
+import AutoDeleteIcon from '@mui/icons-material/AutoDelete';
 export default function TitleBoard() {
 
     const { todoAppData, setTodoAppData } = useContext(GlobalContext);

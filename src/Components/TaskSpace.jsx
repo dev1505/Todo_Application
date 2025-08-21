@@ -2,10 +2,9 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import { AnimatePresence } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "../Contexts/GlobalContexts";
+import { GlobalContext, icons } from "../Contexts/GlobalContexts";
 import NewTaskCard from "./NewTaskCard";
 import TaskCard from "./TaskCard";
-import { data } from 'framer-motion/client';
 
 export default function TaskSpace() {
     const { todoAppData, setTodoAppData } = useContext(GlobalContext);
@@ -122,10 +121,10 @@ export default function TaskSpace() {
                     isMobile ? (<div className="mt-4">
                         {todoAppData?.taskCategory?.map((category) => {
                             if (category.id === selectedCategory) {
-                                const IconElement = todoAppData[category?.name];
+                                const IconElement = icons[category?.name];
                                 return (
                                     <div key={category.id}>
-                                        <div className={`text-center flex justify-between md:mb-2 md:rounded rounded-t-lg bg-neutral-900 p-3 font-bold text-2xl`}>
+                                        <div className={`text-center flex justify-between md:mb-2 rounded-t-lg bg-neutral-900 p-3 font-bold text-2xl`}>
                                             <div className={`flex items-center gap-3  ${category?.textColor}`}>
                                                 <div><IconElement /></div>
                                                 <div>{category?.name}</div>
@@ -178,7 +177,7 @@ export default function TaskSpace() {
             <div className="hidden md:flex flex-col mx-1 gap-5 md:gap-1 md:flex-row md:justify-evenly h-screen">
                 {
                     todoAppData?.taskCategory?.map((data, index) => {
-                        const IconElement = todoAppData[data?.name]
+                        const IconElement = icons[data?.name]
                         return (
                             <div
                                 className={`shadow-md rounded-md p-0.5 w-full md:w-1/3 flex flex-col`}
